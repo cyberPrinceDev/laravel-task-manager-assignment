@@ -11,4 +11,9 @@ Route::get('/dashboard', function () {
 });
 
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+
+// form and submission for creating a task
+Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
