@@ -31,10 +31,33 @@ class TaskController extends Controller
             'title' => 'required|string|min:3|max:255|unique:tasks',
             'description' => 'nullable|string|max:500',
             'is_completed' => 'boolean',
+            'scheduled_date' => 'nullable|date',
+            'start_time' => 'nullable|date_format:H:i',
+            'reminder_time' => 'nullable|date_format:H:i',
         ]);
 
-        Task::create($request->all());
+        Task::create($request->only([
+            'title', 'description', 'is_completed', 'scheduled_date', 'start_time', 'reminder_time'
+        ]));
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
+    }
+
+    public function markComplete(Request $request, $id)
+    {
+        $request->validate([
+            'scheduled_date' => 'nullable|date',
+            'start_time' => 'nullable|date_format:H:i',
+            'reminder_time' => 'nullable|date_format:H:i',
+        ]);
+
+        $task = Task::findOrFail($id);
+        $task->scheduled_date = $request->input('scheduled_date');
+        $task->start_time = $request->input('start_time');
+        $task->reminder_time = $request->input('reminder_time');
+        $task->is_completed = true;
+        $task->save();
+
+        return redirect()->route('tasks.index')->with('success', 'Task marked complete.');
     }
 }

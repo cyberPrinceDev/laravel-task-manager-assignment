@@ -17,3 +17,5 @@ Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.crea
 Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->name('tasks.show');
+// mark a task complete and optionally set scheduling fields
+Route::post('/tasks/{id}/complete', [TaskController::class, 'markComplete'])->name('tasks.complete');

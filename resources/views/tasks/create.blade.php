@@ -32,10 +32,24 @@
 			<label for="title">Title</label>
 			<input type="text" name="title" id="title" value="{{ old('title') }}" required>
 		</div>
-
 		<div>
 			<label for="description">Description</label>
 			<textarea name="description" id="description" rows="6" required>{{ old('description') }}</textarea>
+		</div>
+
+		<div>
+			<label for="scheduled_date">Scheduled date</label>
+			<input type="date" name="scheduled_date" id="scheduled_date" value="{{ old('scheduled_date') }}">
+		</div>
+
+		<div>
+			<label for="start_time">Start time</label>
+			<input type="time" name="start_time" id="start_time" value="{{ old('start_time') }}">
+		</div>
+
+		<div>
+			<label for="reminder_time">Reminder time</label>
+			<input type="time" name="reminder_time" id="reminder_time" value="{{ old('reminder_time') }}">
 		</div>
 
 		<button type="submit">Create Task</button>
